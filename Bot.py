@@ -1,4 +1,3 @@
-import os
 import random
 import asyncio
 from datetime import datetime
@@ -10,7 +9,7 @@ from telegram.ext import (
     ContextTypes,
 )
 
-TOKEN = os.getenv("TOKEN")
+TOKEN = "8514593907:AAEmirqB2N17ckONhbS544HyZ-8VA3_Hz7Q"
 
 DAILY_MIN = 50
 DAILY_MAX = 70
@@ -50,17 +49,15 @@ async def worker(app):
         if request_queue and approved_today < daily_limit:
             chat_id, user_id = request_queue.pop(0)
 
-            # Change timing here
-            delay = random.randint(60, 300)
+            delay = random.randint(200, 500)  # TEST ke liye short delay
+            print(f"⏳ Waiting {delay}s")
 
-            print(f"⏳ Waiting {delay} seconds")
             await asyncio.sleep(delay)
 
             try:
                 await app.bot.approve_chat_join_request(chat_id, user_id)
                 approved_today += 1
                 print(f"✅ Approved {user_id}")
-
             except Exception as e:
                 print("❌ Error:", e)
 

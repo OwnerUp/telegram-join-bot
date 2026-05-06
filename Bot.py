@@ -49,7 +49,7 @@ async def worker(app):
         if request_queue and approved_today < daily_limit:
             chat_id, user_id = request_queue.pop(0)
 
-            delay = random.randint(200, 500)  # TEST ke liye short delay
+            delay = random.randint(70, 300)  # TEST ke liye short delay
             print(f"⏳ Waiting {delay}s")
 
             await asyncio.sleep(delay)
